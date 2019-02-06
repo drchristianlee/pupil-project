@@ -1,0 +1,47 @@
+12:54 PM 9/18/2014
+
+Pupil analysis workflow
+
+1. Run pupil analysis routine on tiff stacks output from the norpix batch processor. The latest eye analysis routine is eye_analysis8_DM_CL4. This routine saves a mat file named diameter.mat that contains the pupil measurements from all of the trials. 
+
+2. Obtain the text file corresponding to the behavioral responses for a particular session. Place it into a folder in addition to the diameter.mat file that corresponds to that session.
+
+3. Run behavior_sort_cl_3 choosing the text file corresponding to the behavioral responses for the session desired. This saves a mat file named decision_log.mat. This mat file contains a list of FAs, FAtimes, GoTimes, Gos, Misses, and NoGos. 
+
+4. Run behavior_average3 choosing a directory containing both the diameter.mat file as well as the decision_log.mat file. This routine saves additional mat files named with the folder name and the type of response. For example 5.2.14 pupil3amFAskeeper.mat contains a a matrix with the false alarm trials and the others filled in as NaNs. It also produces a plot showing each response type. 
+
+5. Place session keepers of a given response type for each mouse in a separate folder. Run group_by_mouse_avg_start on this fonder. This saves a _average file and a _whole file.
+
+6. Place the _average folder of a given response type for each mouse into a new folder named with the response type, for example Go FA Miss NoGo. Run grand_average6 on this folder. 
+
+7. Copy and paste the _by_subect_average files into a new folder named average and run plot_grand_average_shaded_sem7 on this folder. 
+
+8. To analyze behavioral data, place the decision_log mat files into a folder for early and late sessions separated by mouse. This will require manually renaming the decision_log files since they all have the same name given by the behavior_sort_cl_3 script. Run behavior_quantification4 on these folders. This creates .mat files with the results saved for various parameters. Run load_results to load the result files and copy paste the desired values into excel. To complete statistical tests, create a new folder titled average. Inside make two folders named Go and FA. Place the early and late keepers in these folders. Run paired_t_tests_behavior_plot on these folders. To get just the total number of trials, run behavior_quantification5 on folders with just the session keepers in it. The total number will be printed in the command window.
+
+
+9. Workflow for producing bar graphs of pupil size at specified times separated by response type
+
+	1. Since this work is being done after the previous analysis, create a copy of the folder named pupil analysis average_by_mouse and name it pupil analysis average_by_mouse_additional
+
+	2. In the response type folders (such as FA etc.), delete the .mat file named _by_subject_average for each response type. 
+	
+	3. Open grand_average 8 and adjust range for finding max in line 41. For these analyses, early all plotted to frame 325 except go which was plotted to 300. Late all plotted to frame 325 except go which was plotted to 275. Run grand_average8 on each of those folders (this routine is in pupil project, grand average folder). This routine will save .mat files containing the values at time = 0 which is the texture presentation time (in this case the average of frames 152 and 153) as well as a .mat file containing the peak value. 
+
+	4. Copy and paste the .mat files for time zero or peak and place them in separate folders named peak or time zero
+
+	5. Run bar_plots on that folder to create plots of either time zero or peak amplitudes (this routine is in pupil project, grand average folder). To reorder the bars, rename the keepers with 1_ 2_ 3_ or 4_ preceding the name. Then run bar_plots again
+	6. To complete t tests on early and late data at a specific time point, place the keepers of a specific type into a separate folder, such as 3_NoGo_by_subject_time_zero, rename it by appending _early or _late to the end as appropriate. Once the _early and _late files are present, run paired_t_tests_early_late on this folder. It will save the plot. This was done on folders in Y:\Margolis Lab DATA\Chris texture\pupil analysis average_by_mouse_additional\plots
+
+
+******
+Alternate steps 5 and 6. These analyses were done initially but it was decided to first make averages traces of each response type for each subject, and then average those to get the average overall response. The analysis above was completed on January 18, 2016.
+
+5. Copy all of the keepers of a given response type (such as FAskeeper, Goskeeper, etc) into a new folder titled Gos, NoGos, FAs, Misses. Run grand_average5 on this folder. This routine creates two mat files. One named for example FAskeeper_average.mat containing the mean and standard error pupil diameters for that response type in both raw pixel values and as a percentage of baseline. A second mat filed titled FAskeeper_whole.mat for example contains the pupil diameters as a percentage of the average baseline value. Thus, the average of row 1 will be 100% with all of the traces normalized accordingly. Thus, each trace begins as a percentage of the overall average value for all the traces. 
+
+6. Copy all of the average keeper mat files (such as FAskeeper_average.mat) into a new folder titled average. Once the four keeper folders (Faskeeper_average, Goskeeper_average, Misseskeeper_average, NoGoskeeper_average) are there, run plot_grand_average_shaded_sem2. This plots the raw pixel values with and without error bars and the normalized data with error bars. *Note: for publication plot_grand_average_shaded_sem4 was used (is this still correct? Need to check)
+
+
+***
+Alternate step 8. This analysis was done initially but it was decided to instead analyze data by mouse. 
+
+8. To analyze behavioral data, place the decision_log mat files into a single folder for early and late sessions. This will require manually renaming hte decision_log files since they all have the same name given by the behavior_sort_cl_3 script. Then run behavior_quantification3 to analyze.

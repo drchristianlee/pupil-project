@@ -1,0 +1,5 @@
+3:28 PM 11/30/2015
+
+Additional comparisons:
+
+1. To determine whether pupil reflects choice on a trial by trial basis: First, place the keeper of the trial type desired (such as Goskeeper etc) along with the decision_log mat file for that session into a single folder. 

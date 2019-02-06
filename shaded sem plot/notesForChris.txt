@@ -1,0 +1,6 @@
+I fixed the issue with the NaNs for both the mean values and the standard error.
+
+If you do decide to work with more data points, you may need to alter the loading
+and offset calculations of the code.
+
+- Jeremy

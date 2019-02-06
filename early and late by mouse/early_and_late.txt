@@ -1,0 +1,13 @@
+3:04 PM 1/12/2016
+
+Use this script to plot early and late average traces with sem of a single response type by mouse. 
+
+1. Plate the _averge files for each subject into a separate folder. Use group_by_mouse_avg_start to compile data by mouse. This script is located in the pupil statistics folder or the grand average folder. 
+
+2. Copy and paste the early *_average file for a given mouse into a new folder. Append _early to the filename. An example resulting filename is pupil6_Go_average_early. 
+
+3. Copy and paste the late *_average file for a given mouse into a new folder. Append _late to the filename. 
+
+4. Run script
+
+5. To further condense data

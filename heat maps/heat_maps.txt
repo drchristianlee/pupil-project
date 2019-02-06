@@ -1,0 +1,1 @@
+Run this script on the analysis folder containing the keepers for each response type for that session. It will automatically plot heat maps for the three response types hit, false alarm, and correct reject. 

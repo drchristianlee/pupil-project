@@ -1,0 +1,23 @@
+2:28 PM 9/29/2015
+
+Paired t test workflow for comparing average traces for each mouse for each response type. 
+
+1. Place the keepers for each mouse in separate folders separated by response type. 
+
+2. Enter the session (hit or no_go) and the mouse name in lines 9 and 10. Run group_by_mouse_avg_start.mat on this folder. This will save two files, one containing the averaged data in both raw pixel values and percent. The other contains all of the compiled trials with NaN columns removed and zero values converted to NaNs. See alternate step 2 below if using normalization value. 
+
+3. Place the _average.mat files for each mouse into another folder named ttest_go_nogo or ttest_fa_nogo. Make sure files are sorted so that the two conditions being compared come after each other for each mouse. For example, pupil3_Go_average, pupil3_NoGo_average, pupil4_Go_average, pupil4_NoGo_average. Define the point at which to compare the curves in line 17 of paired_t_tests. Run paired_t_tests.
+
+4. If plots are desired along with the statistical tests, run paired_t_tests_plot
+
+To test early and late trials of a given type around a specified time
+
+1. Place the _average keepers of a single response type for each mouse into a folder. Append _early or _late as appropriate. 
+
+2. Run paired_t_tests_range_plot indicating the range to be compared in lines 22 and 23. 
+
+
+To test for the first significant point within a plot
+
+1. Run t_tests_compare_to_contrtol4 on the _whole files for each response type for each mouse. Record the first significant frame resulting from the test. 
+
