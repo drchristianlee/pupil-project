@@ -1,5 +1,5 @@
 % DJM added modified from http://stackoverflow.com/questions/20400873/detect-a-circular-shape-inside-image-in-matlab 
-%uncomment line 13 if folder contains both whisker and pupil sequences
+%uncomment line 18 if folder contains both whisker and pupil sequences
 clear;
 myFolder = uigetdir;
 cd(myFolder);
@@ -9,6 +9,8 @@ count = length(tiffiles);
 % nMovies = count;
 % curMovie = 0;
 w = 1;
+
+contrast_set = str2num(cell2mat(inputdlg('Please enter a value for contrast adjustment. Try starting at 0.1'))); %originally 0.06, also used 0.04
 
 figure;
 
@@ -23,7 +25,7 @@ for curMovie = 1:count;
     % I = imresize(J, 0.5);
     %diamKeeper = zeros(frames,1);
     for z = 1:frames;
-      contrastkeeper(:,:,z) = imadjust(I(:,:,z), [0.0 0.28], []); %originally 0.06, also used at 0.04, for recent movies set to 0.1 to start
+      contrastkeeper(:,:,z) = imadjust(I(:,:,z), [0.0 contrast_set], []);
     end
     
     
@@ -93,6 +95,7 @@ for curMovie = 1:count;
 end
 save('diameter.mat', 'diamKeeper');
 save('tiffiles.mat', 'tiffiles');
+save('contrast_set.mat' , 'contrast_set');
 % 
 % if curMovie == 1;
 %     radius = zeros(frames, 1); % preallocation
